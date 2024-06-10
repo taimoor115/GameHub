@@ -6,6 +6,7 @@ import GamesPage from "./pages/GamesPage";
 import Homepage from "./pages/Homepage";
 import Layout from "./pages/Layout";
 import Form from "./pages/Form";
+import Gamepage from "./pages/Gamepage";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
     ],
   },
   { path: "/", element: <Homepage /> },
+  { path: "/games", element: <Gamepage /> },
   { path: "genres/:slug", element: <GamesPage /> },
   { path: "/platforms/:name", element: <GamesPage /> },
 ]);

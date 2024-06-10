@@ -9,7 +9,6 @@ const GamesPage = () => {
   const [games, setGames] = useState<Game[]>([]);
   const { data, isLoading } = useGames();
   const { name, slug } = useParams();
-  const skeleton = [1, 2, 3, 4, 5, 6];
 
   useEffect(() => {
     if (data.length) {

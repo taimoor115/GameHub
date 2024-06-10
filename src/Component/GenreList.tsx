@@ -5,6 +5,7 @@ import Header from "./Header";
 
 const GamesLists = () => {
   const { data } = useGenres();
+
   return (
     <>
       {data && (

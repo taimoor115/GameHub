@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Game } from "../hooks/useGames";
 import getCropImage from "../service/image-url";
 
@@ -8,11 +8,20 @@ interface Props {
 }
 
 const ListCarousel = ({ games, name }: Props) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/games");
+  };
   return (
     <>
       <div className="flex justify-between m-6 items-center ">
         <h1 className="font-bold text-white text-lg ">{name}</h1>
-        <button className="btn text-sm text-white btn-ghost">View More</button>
+        <button
+          onClick={handleClick}
+          className="btn text-sm text-white btn-ghost"
+        >
+          View More
+        </button>
       </div>
       <div className="m-6 rounded-lg flex scroll-smooth overflow-x-auto whitespace-nowrap ">
         {games.map((game) => (
