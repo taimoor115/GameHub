@@ -1,5 +1,4 @@
 import { useState } from "react";
-import logo from "/home/taimoor_hussain/Desktop/React-Apps/react-ui/public/heaven.png";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -8,7 +7,7 @@ const Navbar = () => {
   return (
     <nav className="flex justify-center items-center flex-wrap p-2">
       <div className="flex items-center flex-shrink-0 text-white">
-        <img src={logo} className="w-100 h-10 " alt="Logo" />
+        {/* <img src={logo} className="w-100 h-10 " alt="Logo" /> */}
       </div>
       <div className="block lg:hidden">
         <button

@@ -13,30 +13,37 @@ const useData = <T>(endpoint: string) => {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
+  const fetchData = async () => {
     setIsLoading(true);
-    apiClient
-      .get<FetchResponse<T>>(endpoint, {
+    try {
+      const response = await apiClient.get<FetchResponse<T>>(endpoint, {
         params: {
           page: page,
           page_size: 20,
         },
-      })
-      .then((res) => {
-        setData((prevData) => [...prevData, ...res.data.results]);
-        setIsLoading(false);
+      });
+      const newData = response.data.results;
+      setData((prev) => [...prev, ...newData]);
+      setPage((prev) => prev + 1);
 
-        if (res.data.results.length === 0) {
-          setHasMore(false);
-        } else {
-          setPage((prev) => prev + 1);
-        }
-      })
-      .catch((err) => setError(err))
-      .finally(() => setIsLoading(false));
-  }, [endpoint, page]);
+      if (newData.length === 0) setHasMore(false);
+    } catch (error) {
+      setError("Error while Fetching");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-  return { data, error, isLoading, hasMore };
+  const fetchNextPage = () => {
+    if (!isLoading && hasMore) {
+      fetchData();
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [endpoint]);
+  return { data, error, isLoading, hasMore, fetchNextPage };
 };
 
 export default useData;

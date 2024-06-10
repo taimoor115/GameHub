@@ -2,10 +2,10 @@ import { createBrowserRouter } from "react-router-dom";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import GameDetailPage from "./pages/GameDetailPage";
-import GamesPage from "./pages/GamesPage";
 import Homepage from "./pages/Homepage";
 import Layout from "./pages/Layout";
 import Form from "./pages/Form";
+import Gamepage from "./pages/Gamepage";
 
 const router = createBrowserRouter([
   {
@@ -19,8 +19,9 @@ const router = createBrowserRouter([
     ],
   },
   { path: "/", element: <Homepage /> },
-  { path: "genres/:slug", element: <GamesPage /> },
-  { path: "/platforms/:name", element: <GamesPage /> },
+  { path: "/games", element: <Gamepage /> },
+  // { path: "genres/:slug", element: <GamesPage /> },
+  // { path: "/platforms/:name", element: <GamesPage /> },
 ]);
 
 export default router;

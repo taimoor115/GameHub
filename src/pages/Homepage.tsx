@@ -1,13 +1,11 @@
 import Carousell from "../Component/Carousell";
-import GenreList from "../Component/GenreList";
-import PlatformList from "../Component/PlatformList";
+import GameList from "../Component/GameList";
 const Homepage = () => {
   return (
-    <>
+    <div>
       <Carousell />
-      <GenreList />
-      <PlatformList />
-    </>
+      <GameList />
+    </div>
   );
 };
 

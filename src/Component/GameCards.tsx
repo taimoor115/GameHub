@@ -5,7 +5,7 @@ import { Game } from "../hooks/useGames";
 import Skeleton from "./Skeleton";
 
 interface Props {
-  game: Game[];
+  game: Game;
 }
 
 const GameCards = ({ game }: Props) => {

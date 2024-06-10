@@ -12,19 +12,20 @@ const Carousell = () => {
       <Carousel
         autoFocus={true}
         autoPlay={true}
+        infiniteLoop={true}
         interval={4000}
         transitionTime={4000}
         showArrows={false}
         showStatus={false}
         showIndicators={false}
-        showThumbs={false}
+        showThumbs={true}
         useKeyboardArrows={true}
       >
         {data.map((game) => (
           <Link to={`/detail/games/${game.slug}`} key={game.id}>
             <div className="relative">
               <img
-                className="h-52 opacity-40 lg:h-96 md:h-96 object-fit-cover"
+                className="h-[200px] opacity-40 lg:h-[550px] md:h-[550px] object-fit-cover"
                 src={game.background_image}
                 alt={game.name}
               />
