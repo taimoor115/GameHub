@@ -14,6 +14,7 @@ const Carousell = () => {
         autoPlay={true}
         infiniteLoop={true}
         interval={4000}
+        emulateTouch={true}
         transitionTime={4000}
         showArrows={false}
         showStatus={false}
