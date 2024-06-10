@@ -16,7 +16,7 @@ const Carousell = () => {
         interval={4000}
         emulateTouch={true}
         transitionTime={4000}
-        showArrows={false}
+        showArrows={true}
         showStatus={false}
         showIndicators={false}
         showThumbs={true}
@@ -26,7 +26,7 @@ const Carousell = () => {
           <Link to={`/detail/games/${game.slug}`} key={game.id}>
             <div className="relative">
               <img
-                className="h-[200px] opacity-40 lg:h-[550px] md:h-[550px] object-fit-cover"
+                className="h-[200px] opacity-80 lg:h-[550px] md:h-[550px] object-fit-cover"
                 src={game.background_image}
                 alt={game.name}
               />

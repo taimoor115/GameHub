@@ -10,7 +10,7 @@ interface Props {
 const ListCarousel = ({ games, name }: Props) => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/games");
+    navigate("/detail/games");
   };
   return (
     <>

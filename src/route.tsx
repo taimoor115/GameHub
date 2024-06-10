@@ -16,10 +16,11 @@ const router = createBrowserRouter([
       { path: "sign_up", element: <Form /> },
       { path: "about", element: <About /> },
       { path: "contact", element: <Contact /> },
+      { path: "games", element: <Gamepage /> },
     ],
   },
   { path: "/", element: <Homepage /> },
-  { path: "/games", element: <Gamepage /> },
+
   // { path: "genres/:slug", element: <GamesPage /> },
   // { path: "/platforms/:name", element: <GamesPage /> },
 ]);

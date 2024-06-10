@@ -12,7 +12,7 @@ const GameCards = ({ game }: Props) => {
   return (
     <>
       {game ? (
-        <div className="card w-80  bg-neutral-950 shadow-xl">
+        <div className="card w-64 bg-neutral-950 shadow-xl">
           <figure>
             <img
               className="object-cover"

@@ -1,18 +1,14 @@
 import { useEffect, useState } from "react";
 import apiClient from "../service/apiClient";
-import { useInView } from "react-intersection-observer";
 
-interface FetchResponse<T> {
+export interface FetchResponse<T> {
   count: number;
   next: string | null;
   previous: string | null;
   results: T[];
 }
-interface Id {
-  id: number;
-}
 
-const useData = <T extends Id>(endpoint: string) => {
+const useData = <T>(endpoint: string) => {
   const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
