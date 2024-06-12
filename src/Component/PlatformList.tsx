@@ -8,7 +8,6 @@ interface Props {
 }
 const PlatformList = ({ platformId, handleSelect, selectedValue }: Props) => {
   const { data } = usePlatforms();
-  console.log(data);
 
   const handleClick = () => {
     const elem: HTMLElement | null = document.activeElement as HTMLElement;
@@ -17,16 +16,14 @@ const PlatformList = ({ platformId, handleSelect, selectedValue }: Props) => {
     }
   };
 
-  console.log(selectedValue);
-
   return (
     <div className="dropdown w-32 text-center bg-zinc-800 rounded-lg">
-      <div tabIndex={0} className="cursor-pointer text-white   p-2 rounded-md ">
+      <div tabIndex={0} className="cursor-pointer text-white p-2 rounded-md ">
         {selectedValue ? selectedValue : "Platforms"}
       </div>
       <ul
         tabIndex={0}
-        className="p-2 shadow menu menu-sm dropdown-content z-[1] text-white bg-black rounded-box w-52"
+        className="p-2 shadow menu menu-sm cursor-pointer dropdown-content z-[1] text-white bg-black rounded-box w-52"
       >
         {data.map((platform) =>
           platform.results.map((platform) => (
@@ -36,6 +33,7 @@ const PlatformList = ({ platformId, handleSelect, selectedValue }: Props) => {
                 onClick={() => {
                   handleSelect(platform.name);
                   platformId(platform.id);
+                  handleClick;
                 }}
               >
                 {platform.name}

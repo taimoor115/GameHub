@@ -4,21 +4,32 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Header from "./Header";
 import PlatformList from "./PlatformList";
 import { useState } from "react";
+import SortSelector from "./SortSelector";
 
 interface Props {
   genreId: string;
   platformId: number;
   platform: (platform: number) => void;
+  handleSelectedOrder: (selectedOrder: string) => void;
+  order: string;
 }
-const Games = ({ genreId, platform, platformId }: Props) => {
-  const { data: games, hasMore, fetchPage } = useGames(genreId, platformId);
+const Games = ({
+  genreId,
+  platform,
+  platformId,
+  handleSelectedOrder,
+  order,
+}: Props) => {
+  const {
+    data: games,
+    hasMore,
+    fetchPage,
+  } = useGames(genreId, platformId, order);
   const [value, setValue] = useState<string>("");
 
   const handleSelect = (platform: string) => {
     setValue(platform);
   };
-
-  console.log(value);
 
   const genreName =
     genreId.charAt(0).toUpperCase() + genreId.slice(1, genreId.length);
@@ -29,11 +40,15 @@ const Games = ({ genreId, platform, platformId }: Props) => {
           name={genreId || value ? genreName || value : "Games"}
           className="text-[60px] font-bold text-white"
         />
-        <PlatformList
-          selectedValue={value}
-          handleSelect={handleSelect}
-          platformId={platform}
-        />
+        <div className="flex gap-4">
+          <PlatformList
+            selectedValue={value}
+            handleSelect={handleSelect}
+            platformId={platform}
+          />
+
+          <SortSelector handleSelectedOrder={handleSelectedOrder} />
+        </div>
       </div>
 
       <div className="items-center justify-center">

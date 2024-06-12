@@ -32,9 +32,14 @@ interface Params {
   page_size: number;
   genres?: string;
   parent_platforms?: number;
+  ordering?: string;
 }
 
-const useGames = <T extends Game>(genreId?: string, platformId?: number) => {
+const useGames = <T extends Game>(
+  genreId?: string,
+  platformId?: number,
+  order?: string
+) => {
   const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -56,11 +61,16 @@ const useGames = <T extends Game>(genreId?: string, platformId?: number) => {
       if (platformId) {
         params["parent_platforms"] = platformId;
       }
+
+      if (order) {
+        params["ordering"] = order.toLowerCase();
+        console.log(order.toLowerCase());
+      }
       const response = await apiClient.get<FetchResponse<T>>("/games", {
         params: params,
       });
 
-      if (genreId || platformId) {
+      if (genreId || platformId || order) {
         setData([...response.data.results, ...data]);
       } else {
         setData([...data, ...response.data.results]);
@@ -78,7 +88,7 @@ const useGames = <T extends Game>(genreId?: string, platformId?: number) => {
 
   useEffect(() => {
     fetchPage();
-  }, [genreId, platformId]);
+  }, [genreId, platformId, order]);
   return { data, error, isLoading, hasMore, fetchPage };
 };
 
