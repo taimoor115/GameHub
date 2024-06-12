@@ -1,4 +1,4 @@
-import useData from "./useData";
+import useList from "./useList";
 
 export interface Platform {
   id: number;
@@ -7,9 +7,6 @@ export interface Platform {
   image_background: string;
 }
 
-
-
-
-const usePlatforms = () => useData<Platform>("/platforms");
+const usePlatforms = () => useList<Platform>("/platforms/lists/parents");
 
 export default usePlatforms;

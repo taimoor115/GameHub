@@ -11,7 +11,7 @@ const Carousell = () => {
       {isLoading && <Loader />}
       <Carousel
         autoFocus={true}
-        autoPlay={true}
+        autoPlay
         infiniteLoop={true}
         interval={4000}
         emulateTouch={true}

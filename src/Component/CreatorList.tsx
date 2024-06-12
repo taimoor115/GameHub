@@ -1,10 +1,11 @@
-import useCreator from "../hooks/useCreator";
+// import React from "react";
+// import useCreator from "../hooks/useCreator";
 
-const CreatorList = () => {
-  const { data } = useCreator();
-  console.log(data);
+// const CreatorList = () => {
+//   const { data } = useCreator();
+//   console.log(data);
 
-  return <div></div>;
-};
+//   return <div></div>;
+// };
 
-export default CreatorList;
+// export default CreatorList;

@@ -1,13 +1,13 @@
-import useData from "./useData";
+// import useData from "./useData";
 
-interface Creator {
-  name: string;
-  slug: string;
-  image: string;
-  image_background: string;
-  games_count: number;
-}
+// interface Creator {
+//   name: string;
+//   slug: string;
+//   image: string;
+//   image_background: string;
+//   games_count: number;
+// }
 
-const useCreator = () => useData<Creator>("/creators");
+// const useCreator = () => useData<Creator>("/creators");
 
-export default useCreator;
+// export default useCreator;

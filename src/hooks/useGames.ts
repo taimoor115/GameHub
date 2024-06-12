@@ -1,6 +1,14 @@
-import useData from "./useData";
-import { Genre } from "./useGenres";
+import { useEffect, useState } from "react";
+import apiClient from "../service/apiClient";
 import { Platform } from "./usePlatforms";
+import { Genre } from "./useGenres";
+
+export interface FetchResponse<T> {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: T[];
+}
 
 export interface GamesPlatform {
   platform: Platform;
@@ -19,6 +27,59 @@ export interface Game {
   parent_platforms: { platform: Platform }[];
 }
 
-const useGames = () => useData<Game>("/games");
+interface Params {
+  page: number;
+  page_size: number;
+  genres?: string;
+  parent_platforms?: number;
+}
+
+const useGames = <T extends Game>(genreId?: string, platformId?: number) => {
+  const [data, setData] = useState<T[]>([]);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(1);
+
+  const fetchPage = async () => {
+    setIsLoading(true);
+    let params: Params = {
+      page: page,
+      page_size: 10,
+    };
+
+    try {
+      if (genreId) {
+        params["genres"] = genreId;
+      }
+
+      if (platformId) {
+        params["parent_platforms"] = platformId;
+      }
+      const response = await apiClient.get<FetchResponse<T>>("/games", {
+        params: params,
+      });
+
+      if (genreId || platformId) {
+        setData([...response.data.results, ...data]);
+      } else {
+        setData([...data, ...response.data.results]);
+      }
+      setPage((prev) => prev + 1);
+      console.log(data);
+
+      if (!response.data.next) setHasMore(false);
+    } catch (error) {
+      setError("Error while Fetching");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPage();
+  }, [genreId, platformId]);
+  return { data, error, isLoading, hasMore, fetchPage };
+};
 
 export default useGames;

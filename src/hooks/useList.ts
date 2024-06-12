@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import apiClient from "../service/apiClient";
-import { FetchResponse } from "./useData";
+import { FetchResponse } from "./useGames";
 
 const useList = <T>(endpoint: string) => {
   const [data, setData] = useState<T[]>([]);

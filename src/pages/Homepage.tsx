@@ -1,10 +1,10 @@
 import Carousell from "../Component/Carousell";
-import GameList from "../Component/GameList";
+import Gamepage from "./Gamepage";
 const Homepage = () => {
   return (
     <div>
       <Carousell />
-      <GameList />
+      <Gamepage />
     </div>
   );
 };

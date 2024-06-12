@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Game } from "../hooks/useGames";
+
 import getCropImage from "../service/image-url";
+import { Game } from "../hooks/useGames";
 
 interface Props {
   games: Game[];
@@ -10,7 +11,7 @@ interface Props {
 const ListCarousel = ({ games, name }: Props) => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/detail/games");
+    navigate("/games");
   };
   return (
     <>

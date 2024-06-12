@@ -5,24 +5,19 @@ import GameDetailPage from "./pages/GameDetailPage";
 import Homepage from "./pages/Homepage";
 import Layout from "./pages/Layout";
 import Form from "./pages/Form";
-import Gamepage from "./pages/Gamepage";
 
 const router = createBrowserRouter([
+  { path: "/", element: <Homepage /> },
   {
-    path: "/detail/",
+    path: "/",
     element: <Layout />,
     children: [
       { path: "games/:slug", element: <GameDetailPage /> },
       { path: "sign_up", element: <Form /> },
       { path: "about", element: <About /> },
       { path: "contact", element: <Contact /> },
-      { path: "games", element: <Gamepage /> },
     ],
   },
-  { path: "/", element: <Homepage /> },
-
-  // { path: "genres/:slug", element: <GamesPage /> },
-  // { path: "/platforms/:name", element: <GamesPage /> },
 ]);
 
 export default router;
