@@ -45,7 +45,7 @@ const useGames = <T extends Game>(genreId?: string, platformId?: number) => {
     setIsLoading(true);
     let params: Params = {
       page: page,
-      page_size: 10,
+      page_size: 25,
     };
 
     try {

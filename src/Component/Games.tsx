@@ -3,6 +3,7 @@ import useGames from "../hooks/useGames";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Header from "./Header";
 import PlatformList from "./PlatformList";
+import { useState } from "react";
 
 interface Props {
   genreId: string;
@@ -11,6 +12,13 @@ interface Props {
 }
 const Games = ({ genreId, platform, platformId }: Props) => {
   const { data: games, hasMore, fetchPage } = useGames(genreId, platformId);
+  const [value, setValue] = useState<string>("");
+
+  const handleSelect = (platform: string) => {
+    setValue(platform);
+  };
+
+  console.log(value);
 
   const genreName =
     genreId.charAt(0).toUpperCase() + genreId.slice(1, genreId.length);
@@ -18,10 +26,14 @@ const Games = ({ genreId, platform, platformId }: Props) => {
     <div>
       <div className="flex flex-col p-4 justify-center gap-8">
         <Header
-          name={genreId ? genreName : "Games"}
+          name={genreId || value ? genreName || value : "Games"}
           className="text-[60px] font-bold text-white"
         />
-        <PlatformList platformId={platform} />
+        <PlatformList
+          selectedValue={value}
+          handleSelect={handleSelect}
+          platformId={platform}
+        />
       </div>
 
       <div className="items-center justify-center">

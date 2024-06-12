@@ -3,34 +3,46 @@ import usePlatforms from "../hooks/usePlatforms";
 
 interface Props {
   platformId: (platform: number) => void;
+  handleSelect: (platform: string) => void;
+  selectedValue: string;
 }
-const PlatformList = ({ platformId }: Props) => {
-  const { data: platforms } = usePlatforms();
+const PlatformList = ({ platformId, handleSelect, selectedValue }: Props) => {
+  const { data } = usePlatforms();
+  console.log(data);
+
   const handleClick = () => {
     const elem: HTMLElement | null = document.activeElement as HTMLElement;
     if (elem) {
       elem?.blur();
     }
   };
+
+  console.log(selectedValue);
+
   return (
-    <div className="dropdown">
-      <div
-        tabIndex={0}
-        className="cursor-pointer text-white bg-transparent p-2 rounded-md "
-      >
-        Platforms
+    <div className="dropdown w-32 text-center bg-zinc-800 rounded-lg">
+      <div tabIndex={0} className="cursor-pointer text-white   p-2 rounded-md ">
+        {selectedValue ? selectedValue : "Platforms"}
       </div>
       <ul
         tabIndex={0}
         className="p-2 shadow menu menu-sm dropdown-content z-[1] text-white bg-black rounded-box w-52"
       >
-        {platforms.map((platform) => (
-          <li key={platform.id} onClick={handleClick}>
-            <Link to="/" onClick={() => platformId(platform.id)}>
-              {platform.name}
-            </Link>
-          </li>
-        ))}
+        {data.map((platform) =>
+          platform.results.map((platform) => (
+            <li key={platform.id} onClick={handleClick}>
+              <Link
+                to="/"
+                onClick={() => {
+                  handleSelect(platform.name);
+                  platformId(platform.id);
+                }}
+              >
+                {platform.name}
+              </Link>
+            </li>
+          ))
+        )}
       </ul>
     </div>
   );
