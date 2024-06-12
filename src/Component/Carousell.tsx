@@ -23,7 +23,7 @@ const Carousell = () => {
         useKeyboardArrows={true}
       >
         {data.map((game) => (
-          <Link to={`/detail/games/${game.slug}`} key={game.id}>
+          <Link to={`/games/${game.slug}`} key={game.id}>
             <div className="relative">
               <img
                 className="h-[200px] opacity-80 lg:h-[550px] md:h-[550px] object-fit-cover"
