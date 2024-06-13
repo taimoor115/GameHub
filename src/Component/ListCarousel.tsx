@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 
 import getCropImage from "../service/image-url";
-import { Game } from "../hooks/useGames";
+import { Game } from "../type";
 
 interface Props {
   games: Game[];

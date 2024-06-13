@@ -3,8 +3,9 @@ import getCropImage from "../service/image-url";
 import CriticScore from "./CriticScore";
 
 import Skeleton from "./Skeleton";
-import { Game } from "../hooks/useGames";
+
 import ProgressRadial from "./ProgressRadial";
+import { Game } from "../type";
 
 interface Props {
   game: Game;

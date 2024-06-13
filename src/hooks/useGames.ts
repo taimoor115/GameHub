@@ -1,41 +1,6 @@
 import { useEffect, useState } from "react";
 import apiClient from "../service/apiClient";
-import { Platform } from "./usePlatforms";
-import { Genre } from "./useGenres";
-import { ImGift } from "react-icons/im";
-
-export interface FetchResponse<T> {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: T[];
-}
-
-export interface GamesPlatform {
-  platform: Platform;
-  requirements: { minimum: string; recommended: string };
-}
-export interface Game {
-  name: string;
-  id: number;
-  slug: string;
-  metacritic: number;
-  rating: number;
-  released: string;
-  background_image: string;
-  genres: Genre[];
-  platforms: GamesPlatform[];
-  parent_platforms: { platform: Platform }[];
-}
-
-interface Params {
-  page?: number;
-  page_size?: number;
-  genres?: string;
-  parent_platforms?: number;
-  ordering?: string;
-  search?: string;
-}
+import { FetchResponse, Game, Params } from "../type";
 
 const useGames = <T extends Game>(
   genreId?: string,
@@ -70,7 +35,7 @@ const useGames = <T extends Game>(
         params: params,
       });
 
-      if (genreId || platformId || order) {
+      if (genreId || platformId || order || search) {
         setData([...response.data.results, ...data]);
         console.log(search, genreId, order, platformId);
       } else {
@@ -86,8 +51,6 @@ const useGames = <T extends Game>(
       setIsLoading(false);
     }
   };
-
-  console.log(search);
 
   useEffect(() => {
     fetchPage();
