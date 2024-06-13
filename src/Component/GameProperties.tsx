@@ -11,7 +11,7 @@ const GameProperties = ({ id }: Props) => {
   return (
     <>
       {game.map((g) => (
-        <div key={g.id} className="grid grid-cols-2 items-start gap-9">
+        <div key={g.id} className="grid grid-cols-2 items-start gap-9 mb-4">
           <div className="flex flex-col">
             <div className="text-zinc-500 text-base font-bold">Platforms</div>
             {g.parent_platforms.map((genre) => (

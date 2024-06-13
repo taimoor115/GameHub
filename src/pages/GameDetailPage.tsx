@@ -25,7 +25,7 @@ const GameDetailPage = () => {
             <div>
               <ExpandableText children={g.description_raw} />
             </div>
-            <div>
+            <div className="mb-3">
               <GameProperties id={slug!} />
             </div>
           </div>

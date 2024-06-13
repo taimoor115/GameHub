@@ -10,14 +10,17 @@ const GenreList = ({ genreFn }: Props) => {
 
   return (
     <>
-      <h2 className="hidden lg:flex font-bold text-2xl mb-4 text-white p-8 mt-5 ">
+      <h2 className="hidden lg:flex md:flex font-bold text-2xl mb-4 text-white p-8 mt-5 ">
         Genres
       </h2>
       <div className="flex-col text-white md:text-sm lg:text-sm hidden p-10 mt-5 md:flex lg:flex">
         <div>
           {data.map((genre) =>
             genre.results.map((genre) => (
-              <div className="flex gap-x-3 items-center mb-2" key={genre.id}>
+              <div
+                className=" gap-x-3 items-center mb-2 hidden lg:flex md:flex"
+                key={genre.id}
+              >
                 <img
                   src={getCropImage(genre.image_background)}
                   alt="genres"

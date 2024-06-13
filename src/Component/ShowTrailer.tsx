@@ -12,6 +12,7 @@ const ShowTrailer = ({ id }: Props) => {
       {first != "0" &&
         movies?.map((t, index) => (
           <video
+            className="mb-4"
             key={index}
             src={t?.results[0]?.data[480]}
             poster={t?.results[0]?.preview}

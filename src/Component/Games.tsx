@@ -5,6 +5,7 @@ import Header from "./Header";
 import PlatformList from "./PlatformList";
 import { useState } from "react";
 import SortSelector from "./SortSelector";
+import SearchInput from "./SearchInput";
 
 interface Props {
   genreId: string;
@@ -20,26 +21,35 @@ const Games = ({
   handleSelectedOrder,
   order,
 }: Props) => {
+  const [value, setValue] = useState<string>("");
+  const [searchText, setSearchText] = useState<string>("");
   const {
     data: games,
     hasMore,
     fetchPage,
-  } = useGames(genreId, platformId, order);
-  const [value, setValue] = useState<string>("");
+  } = useGames(genreId, platformId, order, searchText);
 
   const handleSelect = (platform: string) => {
     setValue(platform);
+  };
+
+  const handleSearchText = (searchText: string) => {
+    setSearchText(searchText);
   };
 
   const genreName =
     genreId.charAt(0).toUpperCase() + genreId.slice(1, genreId.length);
   return (
     <div>
+      <div className="flex  lg:justify-end md:justify-end">
+        <SearchInput handleSearchText={handleSearchText} />
+      </div>
       <div className="flex flex-col p-4 justify-center gap-8">
         <Header
           name={genreId || value ? genreName || value : "Games"}
-          className="text-[60px] font-bold text-white"
+          className="text-[30px] lg:text-[60px] md:text-[60px] font-bold text-white"
         />
+
         <div className="flex gap-4">
           <PlatformList
             selectedValue={value}

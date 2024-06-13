@@ -28,17 +28,19 @@ export interface Game {
 }
 
 interface Params {
-  page: number;
-  page_size: number;
+  page?: number;
+  page_size?: number;
   genres?: string;
   parent_platforms?: number;
   ordering?: string;
+  search?: string;
 }
 
 const useGames = <T extends Game>(
   genreId?: string,
   platformId?: number,
-  order?: string
+  order?: string,
+  search?: string
 ) => {
   const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState("");
@@ -49,10 +51,8 @@ const useGames = <T extends Game>(
   const fetchPage = async () => {
     setIsLoading(true);
     let params: Params = {
-      page: page,
-      page_size: 25,
+      search: search,
     };
-
     try {
       if (genreId) {
         params["genres"] = genreId;
@@ -61,22 +61,26 @@ const useGames = <T extends Game>(
       if (platformId) {
         params["parent_platforms"] = platformId;
       }
-
       if (order) {
         params["ordering"] = order.toLowerCase();
-        console.log(order.toLowerCase());
       }
       const response = await apiClient.get<FetchResponse<T>>("/games", {
         params: params,
       });
 
-      if (genreId || platformId || order) {
-        setData([...response.data.results, ...data]);
-      } else {
-        setData([...data, ...response.data.results]);
-      }
-      setPage((prev) => prev + 1);
-      console.log(data);
+      // if (!search) {
+      //   setPage((prev) => prev + 1)
+      //   params["page"] = page;
+      //   (params["page_size"] = 10),
+      // }
+
+      // if (genreId || platformId || order || search) {
+      //   setData([...response.data.results, ...data]);
+      //   console.log(search, genreId, order, platformId);
+      // } else {
+      //   setData([...data, ...response.data.results]);
+      // }
+      setData(response.data.results);
 
       if (!response.data.next) setHasMore(false);
     } catch (error) {
@@ -86,9 +90,11 @@ const useGames = <T extends Game>(
     }
   };
 
+  console.log(search);
+
   useEffect(() => {
     fetchPage();
-  }, [genreId, platformId, order]);
+  }, [genreId, platformId, order, search]);
   return { data, error, isLoading, hasMore, fetchPage };
 };
 

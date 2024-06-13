@@ -15,7 +15,7 @@ const GameCards = ({ game }: Props) => {
     <>
       {game ? (
         <div
-          className="card w-64 text-wrap bg-neutral-950 shadow-xl"
+          className="card w-80 lg:w-64 md:w-64 text-wrap bg-neutral-950 shadow-xl"
           key={game.id}
         >
           <figure>
