@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import apiClient from "../service/apiClient";
 import { Platform } from "./usePlatforms";
 import { Genre } from "./useGenres";
+import { ImGift } from "react-icons/im";
 
 export interface FetchResponse<T> {
   count: number;
@@ -46,11 +47,12 @@ const useGames = <T extends Game>(
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState<number>(1);
 
   const fetchPage = async () => {
     setIsLoading(true);
     let params: Params = {
+      page: page,
       search: search,
     };
     try {
@@ -68,19 +70,14 @@ const useGames = <T extends Game>(
         params: params,
       });
 
-      // if (!search) {
-      //   setPage((prev) => prev + 1)
-      //   params["page"] = page;
-      //   (params["page_size"] = 10),
-      // }
+      if (genreId || platformId || order) {
+        setData([...response.data.results, ...data]);
+        console.log(search, genreId, order, platformId);
+      } else {
+        setData([...data, ...response.data.results]);
+      }
 
-      // if (genreId || platformId || order || search) {
-      //   setData([...response.data.results, ...data]);
-      //   console.log(search, genreId, order, platformId);
-      // } else {
-      //   setData([...data, ...response.data.results]);
-      // }
-      setData(response.data.results);
+      setPage((prev) => prev + 1);
 
       if (!response.data.next) setHasMore(false);
     } catch (error) {
