@@ -5,7 +5,9 @@ const Navbar = () => {
   return (
     <div className="navbar bg-inherit">
       <div className="navbar-start">
-        <img src={logo} alt="image" className="h-14 object-contain" />
+        <Link to="/">
+          <img src={logo} alt="image" className="h-14 object-contain" />
+        </Link>
       </div>
       <div className="navbar-center">
         <Link className="cursor-pointer font-bold text-xl text-white " to="/">

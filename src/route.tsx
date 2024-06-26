@@ -1,9 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import GameDetailPage from "./pages/GameDetailPage";
+
 import Homepage from "./pages/Homepage";
 import Layout from "./pages/Layout";
+import { lazy } from "react";
+
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const GameDetailPage = lazy(() => import("./pages/GameDetailPage"));
 
 const router = createBrowserRouter([
   { path: "/", element: <Homepage /> },
